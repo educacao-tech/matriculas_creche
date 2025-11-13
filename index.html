@@ -28,7 +28,8 @@
             text-align: center;
         }
 
-        nav button {
+        /* Estilo para os links de navegação */
+        nav a {
             background: #555;
             color: #fff;
             border: none;
@@ -37,9 +38,16 @@
             cursor: pointer;
             font-size: 1rem;
             border-radius: 5px;
+            text-decoration: none; /* Remove o sublinhado padrão dos links */
         }
 
-        nav button:hover {
+        /* Estilo para quando o mouse passa por cima */
+        nav a:hover {
+            background: #777;
+        }
+        
+        /* Estilo para o botão da seção ativa */
+        nav a.active {
             background: #007bff;
         }
 
@@ -50,12 +58,19 @@
             overflow: auto;
         }
 
-        section {
+        /* Esconde todas as seções por padrão */
+        .content-section {
+            display: none;
             background: #fff;
             margin: 1rem 0;
             padding: 1.5rem;
             border-radius: 8px;
             box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        /* Mostra a seção ativa */
+        .content-section.active {
+            display: block;
         }
 
         h2 {
@@ -88,16 +103,6 @@
         li {
             margin-bottom: 0.5rem;
         }
-
-        footer {
-            text-align: center;
-            padding: 1rem 0;
-            background: #333;
-            color: #fff;
-            position: relative;
-            bottom: 0;
-            width: 100%;
-        }
     </style>
 </head>
 <body>
@@ -107,28 +112,33 @@
     </header>
 
     <nav>
-        <button onclick="mostrarSecao('inscricao')">Inscrição para as Creches</button>
-        <button onclick="mostrarSecao('lista-espera')">Lista de Espera</button>
-        <button onclick="mostrarSecao('lista-atendidos')">Lista de Atendidos</button>
-        <button onclick="mostrarSecao('criterios')">Critérios da Lista de Espera</button>
+        <a href="#inscricao" role="button" data-section="inscricao">Inscrição para as Creches</a>
+        <a href="#lista-espera" role="button" data-section="lista-espera">Lista de Espera</a>
+        <a href="#lista-atendidos" role="button" data-section="lista-atendidos">Lista de Atendidos</a>
+        <a href="#criterios" role="button" data-section="criterios">Critérios da Lista de Espera</a>
     </nav>
 
     <div class="container">
-        <section id="inscricao">
+        <section id="inscricao" class="content-section">
             <h2>Inscrição para as Creches</h2>
-            <p>As inscrições para as creches municipais são realizadas online. Para inscrever seu filho, tenha em mãos os seguintes documentos:</p>
+            <p>As inscrições para as creches municipais são realizadas online, geralmente em períodos específicos divulgados pela prefeitura. [4] Para inscrever seu filho, é fundamental ter em mãos os seguintes documentos (originais e cópias):</p>
             <ul>
-                <li>Certidão de nascimento da criança. [11]</li>
-                <li>Comprovante de residência em nome da mãe ou do pai. [11]</li>
-                <li>RG e CPF dos pais ou responsável legal. [11]</li>
-                <li>Comprovante de renda familiar (holerite ou declaração). [11]</li>
+                <li>Certidão de nascimento ou RG da criança. [2, 10]</li>
+                <li>CPF da criança. [2, 22]</li>
+                <li>Comprovante de residência atualizado em nome dos pais ou responsável legal. [4, 10]</li>
+                <li>RG e CPF dos pais ou responsável legal. [2, 10]</li>
+                <li>Comprovante de renda familiar, como holerite ou declaração de trabalho autônomo. [4, 10]</li>
+                <li>Carteira de vacinação da criança atualizada. [18, 23]</li>
+                <li>Cartão do SUS da criança. [2, 23]</li>
+                <li>Laudo médico para crianças com deficiência. [2, 23]</li>
+                <li>Cartão do NIS, caso a família seja beneficiária de programas sociais como o Bolsa Família. [10, 14]</li>
             </ul>
-            <p>O processo de inscrição é um passo fundamental para garantir a transparência na alocação de vagas. [5]</p>
+            <p>O processo de inscrição é um passo fundamental para garantir a transparência na alocação de vagas. [9]</p>
         </section>
 
-        <section id="lista-espera" style="display:none;">
+        <section id="lista-espera" class="content-section">
             <h2>Lista de Espera</h2>
-            <p>A lista de espera é atualizada mensalmente para garantir a transparência do processo. [5] Os nomes são exibidos com iniciais para proteger os dados, de acordo com a Lei Geral de Proteção de Dados (LGPD). [5]</p>
+            <p>A divulgação da lista de espera é uma obrigação do poder público para garantir a transparência do processo. [5, 26] A lista é atualizada mensalmente e os nomes são exibidos com iniciais para proteger os dados, em conformidade com a Lei Geral de Proteção de Dados (LGPD). [9, 15, 27]</p>
             <table>
                 <thead>
                     <tr>
@@ -161,9 +171,9 @@
             </table>
         </section>
 
-        <section id="lista-atendidos" style="display:none;">
+        <section id="lista-atendidos" class="content-section">
             <h2>Lista de Atendidos</h2>
-            <p>Confira a lista das crianças que foram recentemente encaminhadas para uma vaga em nossas creches.</p>
+            <p>Confira a lista das crianças que foram recentemente encaminhadas para uma vaga em nossas creches. A divulgação da demanda atendida também é uma prática de transparência adotada por diversos municípios. [15, 36]</p>
             <table>
                 <thead>
                     <tr>
@@ -192,36 +202,55 @@
             </table>
         </section>
 
-        <section id="criterios" style="display:none;">
+        <section id="criterios" class="content-section">
             <h2>Critérios da Lista de Espera</h2>
-            <p>O acesso às vagas segue critérios de priorização para garantir um atendimento justo e transparente. [2, 19] Alguns dos critérios utilizados são:</p>
+            <p>O acesso às vagas segue critérios de priorização para garantir um atendimento justo e transparente, conforme a legislação e as normas de cada município. [3, 19] Os critérios mais comuns são:</p>
             <ul>
-                <li>Crianças com deficiência, conforme o Estatuto da Pessoa com Deficiência. [2, 6]</li>
-                <li>Crianças vítimas de violência doméstica. [2, 4]</li>
-                <li>Famílias em situação de vulnerabilidade socioeconômica. [2]</li>
-                <li>Proximidade da residência à unidade escolar. [2, 6]</li>
-                <li>Ordem da data de cadastramento no sistema. [4, 9]</li>
-                <li>Ter irmãos já matriculados na mesma unidade escolar. [6]</li>
+                <li>Crianças com deficiência, conforme o Estatuto da Pessoa com Deficiência. [3, 11, 17]</li>
+                <li>Crianças em situação de vulnerabilidade ou risco social, incluindo vítimas de violência doméstica. [1, 3, 11]</li>
+                <li>Famílias de baixa renda ou beneficiárias de programas sociais como o Bolsa Família. [1, 14]</li>
+                <li>Filhos de mães trabalhadoras. [1, 21]</li>
+                <li>Proximidade da residência ou do trabalho dos pais à unidade escolar. [3]</li>
+                <li>Ordem cronológica da inscrição como critério de desempate. [24]</li>
+                <li>Famílias monoparentais. [3]</li>
             </ul>
         </section>
     </div>
 
-    <footer>
-        <p>&copy; 2024 Prefeitura Municipal - Todos os direitos reservados.</p>
-    </footer>
-
     <script>
-        function mostrarSecao(id) {
-            var secoes = document.querySelectorAll('section');
-            secoes.forEach(function(secao) {
-                secao.style.display = 'none';
-            });
-            document.getElementById(id).style.display = 'block';
-        }
-
-        // Mostra a primeira seção por padrão
+        // Aguarda o carregamento completo do conteúdo da página
         document.addEventListener('DOMContentLoaded', function() {
-            document.getElementById('inscricao').style.display = 'block';
+            const navLinks = document.querySelectorAll('nav a');
+            const sections = document.querySelectorAll('.content-section');
+
+            function showSection(targetId) {
+                // Esconde todas as seções e remove a classe 'active' dos links
+                sections.forEach(section => section.classList.remove('active'));
+                navLinks.forEach(link => link.classList.remove('active'));
+
+                // Mostra a seção alvo e adiciona a classe 'active' ao link correspondente
+                const targetSection = document.getElementById(targetId);
+                const targetLink = document.querySelector(`nav a[data-section="${targetId}"]`);
+
+                if (targetSection) {
+                    targetSection.classList.add('active');
+                }
+                if (targetLink) {
+                    targetLink.classList.add('active');
+                }
+            }
+
+            // Adiciona o evento de clique a cada link da navegação
+            navLinks.forEach(link => {
+                link.addEventListener('click', function(event) {
+                    event.preventDefault(); // Impede o comportamento padrão do link
+                    const sectionId = this.getAttribute('data-section');
+                    showSection(sectionId);
+                });
+            });
+
+            // Mostra a primeira seção por padrão ao carregar a página
+            // showSection('inscricao');
         });
     </script>
 
