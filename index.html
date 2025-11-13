@@ -4,8 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lista de Espera para Creches</title>
-    <!-- Adiciona a biblioteca de ícones Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
         body {
             font-family: sans-serif;
@@ -64,60 +62,22 @@
             box-shadow: 0 2px 4px rgba(0,0,0,0.1);
         }
 
-        h2 {
-            color: #007bff;
-            border-bottom: 2px solid #007bff;
-            padding-bottom: 0.5rem;
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 1rem;
-        }
-
-        th, td {
-            padding: 0.8rem;
-            text-align: left;
-            border-bottom: 1px solid #ddd;
-        }
-
-        th {
-            background-color: #f2f2f2;
-        }
-
-        ul {
-            list-style-type: disc;
-            padding-left: 20px;
-        }
-
-        li {
-            margin-bottom: 0.5rem;
-        }
-
-        /* Estilo para tornar a tabela responsiva */
-        .table-responsive {
-            overflow-x: auto;
-            -webkit-overflow-scrolling: touch; /* Rolagem suave em iOS */
-        }
     </style>
 </head>
 <body>
 
     <header>
-        <h1>Painel da Lista de Espera para Creches</h1>
+        <h1>Painel de Matrículas</h1>
     </header>
 
     <nav>
-        <a id="btn-inscricao" href="#" target="_blank" role="button"><i class="fa-solid fa-file-pen"></i> Inscrição para as Creches</a>
-        <a id="btn-lista-espera" href="#" target="_blank" role="button"><i class="fa-solid fa-list-ol"></i> Lista de Espera</a>
-        <a id="btn-lista-atendidos" href="#" target="_blank" role="button"><i class="fa-solid fa-child-reaching"></i> Lista de Atendidos</a>
-        <a id="btn-criterios" href="#" target="_blank" role="button"><i class="fa-solid fa-gavel"></i> Critérios da Lista de Espera</a>
+        <a id="btn-inscricao" href="#" target="_blank" role="button">Inscrição para as Creches</a>
+        <a id="btn-lista-espera" href="#" target="_blank" role="button">Lista de Espera</a>
+        <a id="btn-lista-atendidos" href="#" target="_blank" role="button">Lista de Atendidos</a>
+        <a id="btn-criterios" href="#" target="_blank" role="button">Critérios da Lista de Espera</a>
     </nav>
 
-
-
-
+    
     <script>
         // Aguarda o carregamento completo do conteúdo da página
         document.addEventListener('DOMContentLoaded', function() {
@@ -125,10 +85,10 @@
             // === ÁREA DE CONFIGURAÇÃO DOS LINKS ===
             // Para atualizar um link, basta alterar a URL dentro das aspas.
             const linksDosBotoes = {
-                inscricao: "https://sites.google.com/educacao.batatais.sp.gov.br/seceduc/inscri%C3%A7%C3%A3o-para-creches",
-                listaEspera: "https://docs.google.com/spreadsheets/d/1UcBsKx_OeJ6WmoKkRVb439oKgLDNhRoWIFBfQgrIbg0/edit?gid=2023777180#gid=2023777180",
-                listaAtendidos: "https://docs.google.com/spreadsheets/d/18X6cMyZQqNp_wN1JzQzsL8YGBuwi-6dO2TxfzrLdtIk/edit?gid=2023777180#gid=2023777180",
-                criterios: "https://drive.google.com/file/d/1FyH2JI88pDoOfy_vE8qzSgrIFtccxmGc/view"
+                inscricao: "URL_DO_SEU_DOCUMENTO_DE_INSCRICAO_AQUI",
+                listaEspera: "URL_DO_SEU_DOCUMENTO_LISTA_DE_ESPERA_AQUI",
+                listaAtendidos: "URL_DO_SEU_DOCUMENTO_LISTA_DE_ATENDIDOS_AQUI",
+                criterios: "URL_DO_SEU_DOCUMENTO_CRITERIOS_AQUI"
             };
             // =======================================
 
