@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Espera para Creches</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+
+        header {
+            background-color: #007bff;
+            color: #fff;
+            padding: 1rem 0;
+            text-align: center;
+        }
+
+        nav {
+            background: #333;
+            color: #fff;
+            padding: 0.5rem;
+            text-align: center;
+        }
+
+        nav button {
+            background: #555;
+            color: #fff;
+            border: none;
+            padding: 0.8rem 1.5rem;
+            margin: 0 0.5rem;
+            cursor: pointer;
+            font-size: 1rem;
+            border-radius: 5px;
+        }
+
+        nav button:hover {
+            background: #007bff;
+        }
+
+        .container {
+            padding: 1rem;
+            max-width: 1200px;
+            margin: auto;
+            overflow: auto;
+        }
+
+        section {
+            background: #fff;
+            margin: 1rem 0;
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        h2 {
+            color: #007bff;
+            border-bottom: 2px solid #007bff;
+            padding-bottom: 0.5rem;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+        }
+
+        th, td {
+            padding: 0.8rem;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        ul {
+            list-style-type: disc;
+            padding-left: 20px;
+        }
+
+        li {
+            margin-bottom: 0.5rem;
+        }
+
+        footer {
+            text-align: center;
+            padding: 1rem 0;
+            background: #333;
+            color: #fff;
+            position: relative;
+            bottom: 0;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Painel da Lista de Espera para Creches</h1>
+    </header>
+
+    <nav>
+        <button onclick="mostrarSecao('inscricao')">Inscrição para as Creches</button>
+        <button onclick="mostrarSecao('lista-espera')">Lista de Espera</button>
+        <button onclick="mostrarSecao('lista-atendidos')">Lista de Atendidos</button>
+        <button onclick="mostrarSecao('criterios')">Critérios da Lista de Espera</button>
+    </nav>
+
+    <div class="container">
+        <section id="inscricao">
+            <h2>Inscrição para as Creches</h2>
+            <p>As inscrições para as creches municipais são realizadas online. Para inscrever seu filho, tenha em mãos os seguintes documentos:</p>
+            <ul>
+                <li>Certidão de nascimento da criança. [11]</li>
+                <li>Comprovante de residência em nome da mãe ou do pai. [11]</li>
+                <li>RG e CPF dos pais ou responsável legal. [11]</li>
+                <li>Comprovante de renda familiar (holerite ou declaração). [11]</li>
+            </ul>
+            <p>O processo de inscrição é um passo fundamental para garantir a transparência na alocação de vagas. [5]</p>
+        </section>
+
+        <section id="lista-espera" style="display:none;">
+            <h2>Lista de Espera</h2>
+            <p>A lista de espera é atualizada mensalmente para garantir a transparência do processo. [5] Os nomes são exibidos com iniciais para proteger os dados, de acordo com a Lei Geral de Proteção de Dados (LGPD). [5]</p>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Protocolo</th>
+                        <th>Iniciais da Criança</th>
+                        <th>Data da Inscrição</th>
+                        <th>Posição</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>2024001</td>
+                        <td>J. S. A.</td>
+                        <td>15/01/2024</td>
+                        <td>1</td>
+                    </tr>
+                    <tr>
+                        <td>2024002</td>
+                        <td>M. P. C.</td>
+                        <td>18/01/2024</td>
+                        <td>2</td>
+                    </tr>
+                    <tr>
+                        <td>2024003</td>
+                        <td>L. F. O.</td>
+                        <td>22/01/2024</td>
+                        <td>3</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section id="lista-atendidos" style="display:none;">
+            <h2>Lista de Atendidos</h2>
+            <p>Confira a lista das crianças que foram recentemente encaminhadas para uma vaga em nossas creches.</p>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Iniciais da Criança</th>
+                        <th>Creche Designada</th>
+                        <th>Data de Início</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>A. B. C.</td>
+                        <td>Creche Sonho de Criança</td>
+                        <td>01/03/2024</td>
+                    </tr>
+                    <tr>
+                        <td>D. E. F.</td>
+                        <td>Creche Primeiros Passos</td>
+                        <td>01/03/2024</td>
+                    </tr>
+                    <tr>
+                        <td>G. H. I.</td>
+                        <td>Creche Aprender Brincando</td>
+                        <td>15/03/2024</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section id="criterios" style="display:none;">
+            <h2>Critérios da Lista de Espera</h2>
+            <p>O acesso às vagas segue critérios de priorização para garantir um atendimento justo e transparente. [2, 19] Alguns dos critérios utilizados são:</p>
+            <ul>
+                <li>Crianças com deficiência, conforme o Estatuto da Pessoa com Deficiência. [2, 6]</li>
+                <li>Crianças vítimas de violência doméstica. [2, 4]</li>
+                <li>Famílias em situação de vulnerabilidade socioeconômica. [2]</li>
+                <li>Proximidade da residência à unidade escolar. [2, 6]</li>
+                <li>Ordem da data de cadastramento no sistema. [4, 9]</li>
+                <li>Ter irmãos já matriculados na mesma unidade escolar. [6]</li>
+            </ul>
+        </section>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 Prefeitura Municipal - Todos os direitos reservados.</p>
+    </footer>
+
+    <script>
+        function mostrarSecao(id) {
+            var secoes = document.querySelectorAll('section');
+            secoes.forEach(function(secao) {
+                secao.style.display = 'none';
+            });
+            document.getElementById(id).style.display = 'block';
+        }
+
+        // Mostra a primeira seção por padrão
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('inscricao').style.display = 'block';
+        });
+    </script>
+
+</body>
+</html>
