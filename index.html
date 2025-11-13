@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lista de Espera para Creches</title>
+    <!-- Adiciona a biblioteca de ícones Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
         body {
             font-family: sans-serif;
@@ -46,11 +48,6 @@
             background: #777;
         }
         
-        /* Estilo para o botão da seção ativa */
-        nav a.active {
-            background: #007bff;
-        }
-
         .container {
             padding: 1rem;
             max-width: 1200px;
@@ -60,17 +57,11 @@
 
         /* Esconde todas as seções por padrão */
         .content-section {
-            display: none;
             background: #fff;
             margin: 1rem 0;
             padding: 1.5rem;
             border-radius: 8px;
             box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        }
-
-        /* Mostra a seção ativa */
-        .content-section.active {
-            display: block;
         }
 
         h2 {
@@ -103,6 +94,12 @@
         li {
             margin-bottom: 0.5rem;
         }
+
+        /* Estilo para tornar a tabela responsiva */
+        .table-responsive {
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch; /* Rolagem suave em iOS */
+        }
     </style>
 </head>
 <body>
@@ -112,145 +109,34 @@
     </header>
 
     <nav>
-        <a href="#inscricao" role="button" data-section="inscricao">Inscrição para as Creches</a>
-        <a href="#lista-espera" role="button" data-section="lista-espera">Lista de Espera</a>
-        <a href="#lista-atendidos" role="button" data-section="lista-atendidos">Lista de Atendidos</a>
-        <a href="#criterios" role="button" data-section="criterios">Critérios da Lista de Espera</a>
+        <a id="btn-inscricao" href="#" target="_blank" role="button"><i class="fa-solid fa-file-pen"></i> Inscrição para as Creches</a>
+        <a id="btn-lista-espera" href="#" target="_blank" role="button"><i class="fa-solid fa-list-ol"></i> Lista de Espera</a>
+        <a id="btn-lista-atendidos" href="#" target="_blank" role="button"><i class="fa-solid fa-child-reaching"></i> Lista de Atendidos</a>
+        <a id="btn-criterios" href="#" target="_blank" role="button"><i class="fa-solid fa-gavel"></i> Critérios da Lista de Espera</a>
     </nav>
 
-    <div class="container">
-        <section id="inscricao" class="content-section">
-            <h2>Inscrição para as Creches</h2>
-            <p>As inscrições para as creches municipais são realizadas online, geralmente em períodos específicos divulgados pela prefeitura. [4] Para inscrever seu filho, é fundamental ter em mãos os seguintes documentos (originais e cópias):</p>
-            <ul>
-                <li>Certidão de nascimento ou RG da criança. [2, 10]</li>
-                <li>CPF da criança. [2, 22]</li>
-                <li>Comprovante de residência atualizado em nome dos pais ou responsável legal. [4, 10]</li>
-                <li>RG e CPF dos pais ou responsável legal. [2, 10]</li>
-                <li>Comprovante de renda familiar, como holerite ou declaração de trabalho autônomo. [4, 10]</li>
-                <li>Carteira de vacinação da criança atualizada. [18, 23]</li>
-                <li>Cartão do SUS da criança. [2, 23]</li>
-                <li>Laudo médico para crianças com deficiência. [2, 23]</li>
-                <li>Cartão do NIS, caso a família seja beneficiária de programas sociais como o Bolsa Família. [10, 14]</li>
-            </ul>
-            <p>O processo de inscrição é um passo fundamental para garantir a transparência na alocação de vagas. [9]</p>
-        </section>
 
-        <section id="lista-espera" class="content-section">
-            <h2>Lista de Espera</h2>
-            <p>A divulgação da lista de espera é uma obrigação do poder público para garantir a transparência do processo. [5, 26] A lista é atualizada mensalmente e os nomes são exibidos com iniciais para proteger os dados, em conformidade com a Lei Geral de Proteção de Dados (LGPD). [9, 15, 27]</p>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Protocolo</th>
-                        <th>Iniciais da Criança</th>
-                        <th>Data da Inscrição</th>
-                        <th>Posição</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>2024001</td>
-                        <td>J. S. A.</td>
-                        <td>15/01/2024</td>
-                        <td>1</td>
-                    </tr>
-                    <tr>
-                        <td>2024002</td>
-                        <td>M. P. C.</td>
-                        <td>18/01/2024</td>
-                        <td>2</td>
-                    </tr>
-                    <tr>
-                        <td>2024003</td>
-                        <td>L. F. O.</td>
-                        <td>22/01/2024</td>
-                        <td>3</td>
-                    </tr>
-                </tbody>
-            </table>
-        </section>
 
-        <section id="lista-atendidos" class="content-section">
-            <h2>Lista de Atendidos</h2>
-            <p>Confira a lista das crianças que foram recentemente encaminhadas para uma vaga em nossas creches. A divulgação da demanda atendida também é uma prática de transparência adotada por diversos municípios. [15, 36]</p>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Iniciais da Criança</th>
-                        <th>Creche Designada</th>
-                        <th>Data de Início</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>A. B. C.</td>
-                        <td>Creche Sonho de Criança</td>
-                        <td>01/03/2024</td>
-                    </tr>
-                    <tr>
-                        <td>D. E. F.</td>
-                        <td>Creche Primeiros Passos</td>
-                        <td>01/03/2024</td>
-                    </tr>
-                    <tr>
-                        <td>G. H. I.</td>
-                        <td>Creche Aprender Brincando</td>
-                        <td>15/03/2024</td>
-                    </tr>
-                </tbody>
-            </table>
-        </section>
-
-        <section id="criterios" class="content-section">
-            <h2>Critérios da Lista de Espera</h2>
-            <p>O acesso às vagas segue critérios de priorização para garantir um atendimento justo e transparente, conforme a legislação e as normas de cada município. [3, 19] Os critérios mais comuns são:</p>
-            <ul>
-                <li>Crianças com deficiência, conforme o Estatuto da Pessoa com Deficiência. [3, 11, 17]</li>
-                <li>Crianças em situação de vulnerabilidade ou risco social, incluindo vítimas de violência doméstica. [1, 3, 11]</li>
-                <li>Famílias de baixa renda ou beneficiárias de programas sociais como o Bolsa Família. [1, 14]</li>
-                <li>Filhos de mães trabalhadoras. [1, 21]</li>
-                <li>Proximidade da residência ou do trabalho dos pais à unidade escolar. [3]</li>
-                <li>Ordem cronológica da inscrição como critério de desempate. [24]</li>
-                <li>Famílias monoparentais. [3]</li>
-            </ul>
-        </section>
-    </div>
 
     <script>
         // Aguarda o carregamento completo do conteúdo da página
         document.addEventListener('DOMContentLoaded', function() {
-            const navLinks = document.querySelectorAll('nav a');
-            const sections = document.querySelectorAll('.content-section');
 
-            function showSection(targetId) {
-                // Esconde todas as seções e remove a classe 'active' dos links
-                sections.forEach(section => section.classList.remove('active'));
-                navLinks.forEach(link => link.classList.remove('active'));
+            // === ÁREA DE CONFIGURAÇÃO DOS LINKS ===
+            // Para atualizar um link, basta alterar a URL dentro das aspas.
+            const linksDosBotoes = {
+                inscricao: "https://sites.google.com/educacao.batatais.sp.gov.br/seceduc/inscri%C3%A7%C3%A3o-para-creches",
+                listaEspera: "https://docs.google.com/spreadsheets/d/1UcBsKx_OeJ6WmoKkRVb439oKgLDNhRoWIFBfQgrIbg0/edit?gid=2023777180#gid=2023777180",
+                listaAtendidos: "https://docs.google.com/spreadsheets/d/18X6cMyZQqNp_wN1JzQzsL8YGBuwi-6dO2TxfzrLdtIk/edit?gid=2023777180#gid=2023777180",
+                criterios: "https://drive.google.com/file/d/1FyH2JI88pDoOfy_vE8qzSgrIFtccxmGc/view"
+            };
+            // =======================================
 
-                // Mostra a seção alvo e adiciona a classe 'active' ao link correspondente
-                const targetSection = document.getElementById(targetId);
-                const targetLink = document.querySelector(`nav a[data-section="${targetId}"]`);
-
-                if (targetSection) {
-                    targetSection.classList.add('active');
-                }
-                if (targetLink) {
-                    targetLink.classList.add('active');
-                }
-            }
-
-            // Adiciona o evento de clique a cada link da navegação
-            navLinks.forEach(link => {
-                link.addEventListener('click', function(event) {
-                    event.preventDefault(); // Impede o comportamento padrão do link
-                    const sectionId = this.getAttribute('data-section');
-                    showSection(sectionId);
-                });
-            });
-
-            // Mostra a primeira seção por padrão ao carregar a página
-            // showSection('inscricao');
+            // O código abaixo atribui os links aos botões. Não precisa editar aqui.
+            document.getElementById('btn-inscricao').href = linksDosBotoes.inscricao;
+            document.getElementById('btn-lista-espera').href = linksDosBotoes.listaEspera;
+            document.getElementById('btn-lista-atendidos').href = linksDosBotoes.listaAtendidos;
+            document.getElementById('btn-criterios').href = linksDosBotoes.criterios;
         });
     </script>
 
