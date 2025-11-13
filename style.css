@@ -44,6 +44,7 @@ nav {
     background: var(--dark-color);
     color: var(--light-color);
     padding: 0.1rem; /* Reduzido ainda mais o preenchimento da barra de navegação */
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1); /* Adiciona uma sombra sutil à navegação também */
     text-align: center;
 }
 
@@ -137,5 +138,9 @@ h2 {
         display: block; /* Faz cada botão ocupar uma linha inteira */
         margin: 0.5rem auto; /* Adiciona espaço vertical e centraliza os botões */
         width: 90%; /* Define uma largura para os botões */
+    }
+
+    header h1 {
+        font-size: 1.5rem; /* Reduz um pouco o título em telas pequenas */
     }
 }
