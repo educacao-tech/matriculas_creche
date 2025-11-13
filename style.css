@@ -30,18 +30,15 @@ header {
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15); /* Adiciona uma sombra sutil */
 }
 
-/* Estilo para a imagem do painel (logo) */
-.panel-logo {
-    height: 40px; /* Ajuste o tamanho conforme necessário */
-    width: auto;
-}
-
 /* Estilo para o ícone do painel (logo) */
 .panel-logo {
     font-size: 1.5em; /* Ajuste o tamanho do ícone */
-    color: #fff; /* Cor do ícone (branco, para combinar com o texto) */
+    color: var(--light-color); /* Cor do ícone (branco, para combinar com o texto) */
 }
 
+header h1 {
+    font-size: 1.8rem; /* Aumenta um pouco o título principal */
+}
 
 nav {
     background: var(--dark-color);
@@ -73,23 +70,23 @@ nav a .fa-solid {
 
 /* --- Cores Individuais para os Ícones --- */
 #btn-inscricao .fa-file-pen {
-    color: #87CEFA; /* Azul Céu Claro */
+    color: #a0c4ff; /* Tom de azul suave */
 }
 
 #btn-lista-espera .fa-list-ol {
-    color: #FFD700; /* Dourado */
+    color: #fdffb6; /* Amarelo pastel */
 }
 
 #btn-lista-atendidos .fa-child-reaching {
-    color: #90EE90; /* Verde Claro */
+    color: #caffbf; /* Verde pastel */
 }
 
 #btn-criterios .fa-gavel {
-    color: #DDA0DD; /* Ameixa */
+    color: #ffc6ff; /* Roxo/rosa pastel */
 }
 
 #btn-ei-ef .fa-school {
-    color: #F08080; /* Coral Claro */
+    color: #ffadad; /* Vermelho/coral pastel */
 }
 
 /* Estilo para quando o mouse passa por cima */
