@@ -8,6 +8,30 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <!-- Link para o arquivo CSS externo -->
     <link rel="stylesheet" href="style.css">
+    <style>
+        /* Estilos para melhorar a responsividade em dispositivos móveis */
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .panel-logo {
+                margin-bottom: 10px;
+            }
+
+            nav {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+            }
+
+            nav a {
+                width: 90%; /* Ocupa 90% da largura para facilitar o toque */
+                margin-bottom: 10px; /* Adiciona espaço entre os botões */
+            }
+        }
+    </style>
 </head>
 <body>
 
