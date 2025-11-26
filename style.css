@@ -154,3 +154,15 @@ h2 {
         box-sizing: border-box; /* Garante que o padding não aumente a largura total */
     }
 }
+
+/* Media Query adicional para telas muito pequenas (celulares em modo retrato) */
+@media (max-width: 480px) {
+    header h1 {
+        font-size: 1.3rem; /* Reduz ainda mais o título */
+    }
+
+    nav a {
+        font-size: 0.9rem; /* Reduz a fonte dos botões */
+        padding: 0.5rem; /* Ajusta o preenchimento para o texto não ficar espremido */
+    }
+}
