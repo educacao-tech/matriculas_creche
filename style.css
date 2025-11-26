@@ -134,13 +134,23 @@ h2 {
 
 /* Media Query para responsividade em telas pequenas (celulares) */
 @media (max-width: 768px) {
-    nav a {
-        display: block; /* Faz cada botão ocupar uma linha inteira */
-        margin: 0.5rem auto; /* Adiciona espaço vertical e centraliza os botões */
-        width: 90%; /* Define uma largura para os botões */
+    header {
+        flex-direction: column; /* Empilha o ícone e o título */
+        text-align: center;
+    }
+
+    .panel-logo {
+        margin-bottom: 10px; /* Espaço entre o logo e o título */
     }
 
     header h1 {
         font-size: 1.5rem; /* Reduz um pouco o título em telas pequenas */
+    }
+
+    nav a {
+        display: block; /* Faz cada botão ocupar uma linha inteira */
+        margin: 10px auto; /* Adiciona espaço vertical e centraliza os botões */
+        width: 90%; /* Define uma largura para os botões */
+        box-sizing: border-box; /* Garante que o padding não aumente a largura total */
     }
 }
