@@ -4,34 +4,59 @@
    ========================================================================== */
 
 :root {
-    --primary: #1e40af;          /* Azul royal institucional */
-    --primary-dark: #1e3a8a;     /* Azul profundo */
-    --primary-light: #dbeafe;    /* Azul suave */
+    --primary: #1e40af;
+    /* Azul royal institucional */
+    --primary-dark: #1e3a8a;
+    /* Azul profundo */
+    --primary-light: #dbeafe;
+    /* Azul suave */
     --primary-gradient: linear-gradient(135deg, #1e3a8a 0%, #2563eb 50%, #3b82f6 100%);
-    
-    --bg-page: #f8fafc;          /* Fundo suave off-white */
-    --bg-card: #ffffff;          /* Fundo branco dos cards */
-    --bg-card-hover: #ffffff;
-    
-    --text-primary: #0f172a;     /* Cinza ardósia escuro */
-    --text-secondary: #475569;   /* Cinza médio para textos descritivos */
-    --text-muted: #64748b;       /* Cinza claro para legendas */
-    --text-inverse: #ffffff;     /* Texto claro em fundos escuros */
 
-    --border-color: #e2e8f0;     /* Linha divisória sutil */
-    --border-hover: #93c5fd;     /* Borda ao focar/hover */
+    --bg-page: #f8fafc;
+    /* Fundo suave off-white */
+    --bg-card: #ffffff;
+    /* Fundo branco dos cards */
+    --bg-card-hover: #ffffff;
+
+    --text-primary: #0f172a;
+    /* Cinza ardósia escuro */
+    --text-secondary: #475569;
+    /* Cinza médio para textos descritivos */
+    --text-muted: #64748b;
+    /* Cinza claro para legendas */
+    --text-inverse: #ffffff;
+    /* Texto claro em fundos escuros */
+
+    --border-color: #e2e8f0;
+    /* Linha divisória sutil */
+    --border-hover: #93c5fd;
+    /* Borda ao focar/hover */
 
     /* Cores temáticas para cada serviço */
-    --theme-creche: #2563eb;     /* Azul */
+    --theme-creche: #2563eb;
+    /* Azul */
     --theme-creche-bg: #eff6ff;
-    --theme-espera: #d97706;     /* Âmbar / Laranja */
+    --theme-espera: #d97706;
+    /* Âmbar / Laranja */
     --theme-espera-bg: #fffbeb;
-    --theme-atendidos: #059669;  /* Esmeralda / Verde */
+    --theme-atendidos: #059669;
+    /* Esmeralda / Verde */
     --theme-atendidos-bg: #ecfdf5;
-    --theme-criterios: #7c3aed;  /* Violeta / Roxo */
+    --theme-criterios: #7c3aed;
+    /* Violeta / Roxo */
     --theme-criterios-bg: #f5f3ff;
-    --theme-eief: #e11d48;       /* Rosa carmesim */
+    --theme-eief: #e11d48;
+    /* Rosa carmesim */
     --theme-eief-bg: #fff1f2;
+    --theme-transporte: #0284c7;
+    /* Ciano / Azul celeste */
+    --theme-transporte-bg: #f0f9ff;
+    --theme-merenda: #16a34a;
+    /* Verde natureza */
+    --theme-merenda-bg: #f0fdf4;
+    --theme-geral: #475569;
+    /* Ardósia / Neutro */
+    --theme-geral-bg: #f8fafc;
 
     --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
     --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.07), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
@@ -47,7 +72,9 @@
 }
 
 /* Reset e base */
-*, *::before, *::after {
+*,
+*::before,
+*::after {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
@@ -133,7 +160,7 @@ header.hero-header::before {
     right: 0;
     bottom: 0;
     background: radial-gradient(circle at 20% 30%, rgba(255, 255, 255, 0.12) 0%, transparent 40%),
-                radial-gradient(circle at 80% 80%, rgba(255, 255, 255, 0.08) 0%, transparent 45%);
+        radial-gradient(circle at 80% 80%, rgba(255, 255, 255, 0.08) 0%, transparent 45%);
     pointer-events: none;
 }
 
@@ -413,30 +440,50 @@ main.main-content {
     gap: 0.35rem;
 }
 
-/* Cores específicas por Card */
+/* Cores específicas por Card (Classes Utilitárias e IDs) */
+.theme-creche,
 #btn-inscricao {
     --card-accent: var(--theme-creche);
     --card-bg-light: var(--theme-creche-bg);
 }
 
+.theme-espera,
 #btn-lista-espera {
     --card-accent: var(--theme-espera);
     --card-bg-light: var(--theme-espera-bg);
 }
 
+.theme-atendidos,
 #btn-lista-atendidos {
     --card-accent: var(--theme-atendidos);
     --card-bg-light: var(--theme-atendidos-bg);
 }
 
+.theme-criterios,
 #btn-criterios {
     --card-accent: var(--theme-criterios);
     --card-bg-light: var(--theme-criterios-bg);
 }
 
+.theme-eief,
 #btn-ei-ef {
     --card-accent: var(--theme-eief);
     --card-bg-light: var(--theme-eief-bg);
+}
+
+.theme-transporte {
+    --card-accent: var(--theme-transporte);
+    --card-bg-light: var(--theme-transporte-bg);
+}
+
+.theme-merenda {
+    --card-accent: var(--theme-merenda);
+    --card-bg-light: var(--theme-merenda-bg);
+}
+
+.theme-geral {
+    --card-accent: var(--theme-geral);
+    --card-bg-light: var(--theme-geral-bg);
 }
 
 /* Card Destacado (Inscrição de Creche e EI/EF) */
@@ -565,6 +612,27 @@ footer.page-footer {
     color: #64748b;
 }
 
+.admin-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    color: #64748b;
+    font-size: 0.78rem;
+    text-decoration: none;
+    margin-top: 0.85rem;
+    padding: 0.35rem 0.85rem;
+    border-radius: var(--radius-full);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    background: rgba(255, 255, 255, 0.02);
+    transition: var(--transition);
+}
+
+.admin-link:hover {
+    color: #93c5fd;
+    border-color: rgba(147, 197, 253, 0.3);
+    background: rgba(255, 255, 255, 0.06);
+}
+
 /* Responsividade */
 @media (max-width: 900px) {
     header.hero-header {
@@ -606,7 +674,8 @@ footer.page-footer {
     }
 
     .header-tags {
-        display: none; /* Simplifica visual em telas bem estreitas */
+        display: none;
+        /* Simplifica visual em telas bem estreitas */
     }
 
     main.main-content {

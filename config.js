@@ -80,3 +80,4 @@ window.PORTAL_CONFIG = {
         }
     ]
 };
+

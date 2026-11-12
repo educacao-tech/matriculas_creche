@@ -16,6 +16,9 @@
     
     <!-- Folha de Estilos -->
     <link rel="stylesheet" href="style.css">
+
+    <!-- Configuração Padrão dos Atalhos -->
+    <script src="config.js"></script>
 </head>
 <body>
 
@@ -39,12 +42,12 @@
             <div class="header-icon-badge" aria-hidden="true">
                 <i class="fa-solid fa-graduation-cap"></i>
             </div>
-            <h1>Painel de Matrículas e Vagas</h1>
-            <p class="header-subtitle">
+            <h1 id="hero-title">Painel de Matrículas e Vagas</h1>
+            <p id="hero-subtitle" class="header-subtitle">
                 Acesso unificado para solicitação de vagas, consulta de listas de espera e acompanhamento das convocações das creches e escolas municipais.
             </p>
             <div class="header-tags">
-                <span class="header-tag"><i class="fa-solid fa-calendar-check" aria-hidden="true"></i> Ano Letivo 2026</span>
+                <span class="header-tag" id="badge-ano-letivo"><i class="fa-solid fa-calendar-check" aria-hidden="true"></i> Ano Letivo 2026</span>
                 <span class="header-tag"><i class="fa-solid fa-arrows-rotate" aria-hidden="true"></i> Atualizado em Tempo Real</span>
                 <span class="header-tag"><i class="fa-solid fa-circle-check" aria-hidden="true"></i> Acesso Público e Gratuito</span>
             </div>
@@ -60,14 +63,14 @@
                 <i class="fa-solid fa-layer-group" aria-hidden="true"></i>
                 Serviços Disponíveis
             </span>
-            <span class="section-count">5 acessos diretos</span>
+            <span class="section-count" id="services-count">Carregando serviços...</span>
         </div>
 
         <!-- Grade de Cards Interativos -->
-        <nav class="services-grid" aria-label="Links rápidos de serviços e matrículas">
+        <nav id="services-grid" class="services-grid" aria-label="Links rápidos de serviços e matrículas">
 
-            <!-- Card 1: Inscrição Creches -->
-            <a id="btn-inscricao" class="service-card card-featured" href="#" target="_blank" rel="noopener noreferrer">
+            <!-- Fallback estático caso o JavaScript esteja desativado -->
+            <a id="btn-inscricao" class="service-card theme-creche card-featured" href="https://sites.google.com/educacao.batatais.sp.gov.br/seceduc/inscri%C3%A7%C3%A3o-para-creches" target="_blank" rel="noopener noreferrer">
                 <div class="card-header-area">
                     <div class="card-icon-wrapper">
                         <i class="fa-solid fa-file-pen" aria-hidden="true"></i>
@@ -76,9 +79,7 @@
                 </div>
                 <div class="card-body-area">
                     <h2 class="card-title">Inscrição para Creches</h2>
-                    <p class="card-desc">
-                        Formulário eletrônico oficial para cadastramento e solicitação de nova vaga em creche municipal.
-                    </p>
+                    <p class="card-desc">Formulário eletrônico oficial para cadastramento e solicitação de nova vaga em creche municipal.</p>
                 </div>
                 <div class="card-footer-area">
                     <span class="card-action-text">Acessar Formulário</span>
@@ -86,8 +87,7 @@
                 </div>
             </a>
 
-            <!-- Card 2: Lista de Espera -->
-            <a id="btn-lista-espera" class="service-card" href="#" target="_blank" rel="noopener noreferrer">
+            <a id="btn-lista-espera" class="service-card theme-espera" href="https://docs.google.com/spreadsheets/d/1UcBsKx_OeJ6WmoKkRVb439oKgLDNhRoWIFBfQgrIbg0/edit?gid=2023777180#gid=2023777180" target="_blank" rel="noopener noreferrer">
                 <div class="card-header-area">
                     <div class="card-icon-wrapper">
                         <i class="fa-solid fa-list-ol" aria-hidden="true"></i>
@@ -96,9 +96,7 @@
                 </div>
                 <div class="card-body-area">
                     <h2 class="card-title">Lista de Espera 2026</h2>
-                    <p class="card-desc">
-                        Acompanhe a posição na fila de espera, ordem de classificação e data de protocolo da solicitação.
-                    </p>
+                    <p class="card-desc">Acompanhe a posição na fila de espera, ordem de classificação e data de protocolo da solicitação.</p>
                 </div>
                 <div class="card-footer-area">
                     <span class="card-action-text">Consultar Planilha</span>
@@ -106,8 +104,7 @@
                 </div>
             </a>
 
-            <!-- Card 3: Lista de Atendidos -->
-            <a id="btn-lista-atendidos" class="service-card" href="#" target="_blank" rel="noopener noreferrer">
+            <a id="btn-lista-atendidos" class="service-card theme-atendidos" href="https://docs.google.com/spreadsheets/d/18X6cMyZQqNp_wN1JzQzsL8YGBuwi-6dO2TxfzrLdtIk/edit?gid=2023777180#gid=2023777180" target="_blank" rel="noopener noreferrer">
                 <div class="card-header-area">
                     <div class="card-icon-wrapper">
                         <i class="fa-solid fa-child-reaching" aria-hidden="true"></i>
@@ -116,9 +113,7 @@
                 </div>
                 <div class="card-body-area">
                     <h2 class="card-title">Lista de Atendidos 2026</h2>
-                    <p class="card-desc">
-                        Relação das crianças contempladas com vagas e convocadas para a confirmação de matrícula na unidade.
-                    </p>
+                    <p class="card-desc">Relação das crianças contempladas com vagas e convocadas para a confirmação de matrícula na unidade.</p>
                 </div>
                 <div class="card-footer-area">
                     <span class="card-action-text">Ver Convocados</span>
@@ -126,8 +121,7 @@
                 </div>
             </a>
 
-            <!-- Card 4: Critérios da Lista de Espera -->
-            <a id="btn-criterios" class="service-card" href="#" target="_blank" rel="noopener noreferrer">
+            <a id="btn-criterios" class="service-card theme-criterios" href="https://drive.google.com/file/d/1FyH2JI88pDoOfy_vE8qzSgrIFtccxmGc/view" target="_blank" rel="noopener noreferrer">
                 <div class="card-header-area">
                     <div class="card-icon-wrapper">
                         <i class="fa-solid fa-gavel" aria-hidden="true"></i>
@@ -136,9 +130,7 @@
                 </div>
                 <div class="card-body-area">
                     <h2 class="card-title">Critérios da Lista de Espera</h2>
-                    <p class="card-desc">
-                        Diretrizes oficiais, pontuação socioeconômica, prioridades legais e regras de desempate da fila.
-                    </p>
+                    <p class="card-desc">Diretrizes oficiais, pontuação socioeconômica, prioridades legais e regras de desempate da fila.</p>
                 </div>
                 <div class="card-footer-area">
                     <span class="card-action-text">Abrir Documento</span>
@@ -146,8 +138,7 @@
                 </div>
             </a>
 
-            <!-- Card 5: Inscrição EI e EF -->
-            <a id="btn-ei-ef" class="service-card card-featured" href="#" target="_blank" rel="noopener noreferrer">
+            <a id="btn-ei-ef" class="service-card theme-eief card-featured" href="https://sites.google.com/educacao.batatais.sp.gov.br/seceduc/inscri%C3%A7%C3%A3o-para-ei-e-ef" target="_blank" rel="noopener noreferrer">
                 <div class="card-header-area">
                     <div class="card-icon-wrapper">
                         <i class="fa-solid fa-school" aria-hidden="true"></i>
@@ -156,9 +147,7 @@
                 </div>
                 <div class="card-body-area">
                     <h2 class="card-title">Inscrição EI e EF</h2>
-                    <p class="card-desc">
-                        Inscrições e transferências para turmas da Pré-escola (Educação Infantil) e Ensino Fundamental (1º ao 9º ano).
-                    </p>
+                    <p class="card-desc">Inscrições e transferências para turmas da Pré-escola (Educação Infantil) e Ensino Fundamental (1º ao 9º ano).</p>
                 </div>
                 <div class="card-footer-area">
                     <span class="card-action-text">Acessar Inscrição</span>
@@ -223,39 +212,111 @@
             <p class="footer-copyright">
                 &copy; 2026 Município de Batatais - SP. Todos os direitos reservados.
             </p>
+
+            <!-- Acesso ao Painel Administrativo -->
+            <a href="admin.html" class="admin-link" title="Área restrita para gestores da Secretaria de Educação">
+                <i class="fa-solid fa-sliders" aria-hidden="true"></i>
+                <span>Painel Administrativo</span>
+            </a>
         </div>
     </footer>
 
-    <!-- Script de Configuração de Links -->
+    <!-- Script de Aplicação das Configurações Dinâmicas -->
     <script>
-        // Aguarda o carregamento completo do conteúdo da página
         document.addEventListener('DOMContentLoaded', function() {
+            const STORAGE_KEY = 'portal_matriculas_config';
+            let config = null;
 
-            // === ÁREA DE CONFIGURAÇÃO DOS LINKS ===
-            // Para atualizar um link, basta alterar a URL dentro das aspas.
-            const linksDosBotoes = {
-                inscricao: "https://sites.google.com/educacao.batatais.sp.gov.br/seceduc/inscri%C3%A7%C3%A3o-para-creches",
-                listaEspera: "https://docs.google.com/spreadsheets/d/1UcBsKx_OeJ6WmoKkRVb439oKgLDNhRoWIFBfQgrIbg0/edit?gid=2023777180#gid=2023777180",
-                listaAtendidos: "https://docs.google.com/spreadsheets/d/18X6cMyZQqNp_wN1JzQzsL8YGBuwi-6dO2TxfzrLdtIk/edit?gid=2023777180#gid=2023777180",
-                criterios: "https://drive.google.com/file/d/1FyH2JI88pDoOfy_vE8qzSgrIFtccxmGc/view",
-                eiEf: "https://sites.google.com/educacao.batatais.sp.gov.br/seceduc/inscri%C3%A7%C3%A3o-para-ei-e-ef"
-            };
-            // =======================================
-
-            // Atribui os links aos botões de forma segura
-            const mapeamento = [
-                { id: 'btn-inscricao', url: linksDosBotoes.inscricao },
-                { id: 'btn-lista-espera', url: linksDosBotoes.listaEspera },
-                { id: 'btn-lista-atendidos', url: linksDosBotoes.listaAtendidos },
-                { id: 'btn-criterios', url: linksDosBotoes.criterios },
-                { id: 'btn-ei-ef', url: linksDosBotoes.eiEf }
-            ];
-
-            mapeamento.forEach(item => {
-                const el = document.getElementById(item.id);
-                if (el && item.url) {
-                    el.href = item.url;
+            // 1. Tenta carregar do LocalStorage (alterações feitas no admin.html)
+            const salvo = localStorage.getItem(STORAGE_KEY);
+            if (salvo) {
+                try {
+                    config = JSON.parse(salvo);
+                } catch (e) {
+                    console.error("Erro ao carregar dados do localStorage:", e);
                 }
+            }
+
+            // 2. Se não houver no LocalStorage, usa o window.PORTAL_CONFIG de config.js
+            if (!config && window.PORTAL_CONFIG) {
+                config = window.PORTAL_CONFIG;
+            }
+
+            if (!config || !Array.isArray(config.atalhos)) {
+                return; // Mantém o HTML estático fallback
+            }
+
+            // Atualiza Textos do Cabeçalho se configurados
+            if (config.tituloHero) {
+                const elTitulo = document.getElementById('hero-title');
+                if (elTitulo) elTitulo.textContent = config.tituloHero;
+            }
+            if (config.subtituloHero) {
+                const elSub = document.getElementById('hero-subtitle');
+                if (elSub) elSub.textContent = config.subtituloHero;
+            }
+
+            // Atualiza Ano Letivo se configurado
+            if (config.anoLetivo) {
+                const badgeAno = document.getElementById('badge-ano-letivo');
+                if (badgeAno) {
+                    badgeAno.innerHTML = `<i class="fa-solid fa-calendar-check" aria-hidden="true"></i> Ano Letivo ${config.anoLetivo}`;
+                }
+            }
+
+            // Renderiza os atalhos ativos
+            const gridContainer = document.getElementById('services-grid');
+            const countBadge = document.getElementById('services-count');
+            
+            // Filtra apenas os atalhos habilitados (ativo !== false)
+            const atalhosAtivos = config.atalhos.filter(item => item.ativo !== false);
+
+            if (countBadge) {
+                countBadge.textContent = `${atalhosAtivos.length} ${atalhosAtivos.length === 1 ? 'acesso direto' : 'acessos diretos'}`;
+            }
+
+            if (atalhosAtivos.length === 0) {
+                gridContainer.innerHTML = `
+                    <div style="grid-column: 1 / -1; background: #fff; padding: 3rem 1.5rem; text-align: center; border-radius: 16px; border: 1px solid #e2e8f0; color: #64748b;">
+                        <i class="fa-solid fa-calendar-xmark" style="font-size: 2.5rem; color: #94a3b8; margin-bottom: 1rem; display: block;"></i>
+                        <h3 style="font-size: 1.2rem; color: #1e293b; margin-bottom: 0.5rem;">Nenhum serviço disponível no momento</h3>
+                        <p style="max-width: 460px; margin: 0 auto; font-size: 0.92rem;">Os períodos de inscrição ou consultas estão temporariamente pausados pela Secretaria de Educação.</p>
+                    </div>
+                `;
+                return;
+            }
+
+            // Limpa o grid e injeta os cards ativos configurados
+            gridContainer.innerHTML = '';
+
+            atalhosAtivos.forEach(item => {
+                const card = document.createElement('a');
+                card.id = item.id || `btn-${item.chave || 'custom'}`;
+                card.className = `service-card theme-${item.tema || 'creche'} ${item.destaque ? 'card-featured' : ''}`;
+                card.href = item.url || '#';
+                card.target = '_blank';
+                card.rel = 'noopener noreferrer';
+
+                card.innerHTML = `
+                    <div class="card-header-area">
+                        <div class="card-icon-wrapper">
+                            <i class="${item.icone || 'fa-solid fa-arrow-up-right-from-square'}" aria-hidden="true"></i>
+                        </div>
+                        <span class="card-badge">${item.badge || 'Acesso'}</span>
+                    </div>
+                    <div class="card-body-area">
+                        <h2 class="card-title">${item.titulo || 'Serviço'}</h2>
+                        <p class="card-desc">${item.descricao || ''}</p>
+                    </div>
+                    <div class="card-footer-area">
+                        <span class="card-action-text">${item.textoBotao || 'Acessar'}</span>
+                        <span class="card-action-arrow">
+                            <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                `;
+
+                gridContainer.appendChild(card);
             });
         });
     </script>

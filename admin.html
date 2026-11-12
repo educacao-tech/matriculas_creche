@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Painel Administrativo | Gestão de Matrículas e Vagas</title>
+    
+    <!-- Google Fonts: Plus Jakarta Sans -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <!-- Folha de Estilos Pública (para a Prévia ao Vivo) -->
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Folha de Estilos do Painel Administrativo -->
+    <link rel="stylesheet" href="admin.css">
+</head>
+<body>
+
+    <!-- Tela de Autenticação / Senha -->
+    <div id="login-overlay" class="login-overlay">
+        <div class="login-card">
+            <div class="login-icon">
+                <i class="fa-solid fa-lock" aria-hidden="true"></i>
+            </div>
+            <h1 class="login-title">Acesso Restrito</h1>
+            <p class="login-desc">Painel de Controle e Gestão de Vagas da Secretaria Municipal de Educação.</p>
+
+            <form id="login-form" class="login-form">
+                <div class="form-group">
+                    <label class="form-label" for="input-senha">Senha de Administrador</label>
+                    <div class="input-password-wrapper">
+                        <input type="password" id="input-senha" class="form-input" placeholder="Digite sua senha..." required autocomplete="current-password">
+                        <button type="button" id="btn-toggle-pwd" class="btn-toggle-pwd" title="Mostrar ou ocultar senha">
+                            <i class="fa-solid fa-eye"></i>
+                        </button>
+                    </div>
+                    <span id="login-erro" class="form-help" style="color: var(--danger); display: none; font-weight: 700; margin-top: 0.35rem;">
+                        <i class="fa-solid fa-circle-exclamation"></i> Senha incorreta. Tente novamente.
+                    </span>
+                </div>
+
+                <div class="login-options">
+                    <label class="checkbox-label">
+                        <input type="checkbox" id="check-lembrar" checked>
+                        <span>Lembrar neste computador</span>
+                    </label>
+                </div>
+
+                <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 0.5rem; padding: 0.85rem;">
+                    <i class="fa-solid fa-right-to-bracket"></i> Acessar Painel
+                </button>
+
+                <a href="index.html" class="btn btn-secondary btn-sm" style="width: 100%; margin-top: 0.25rem;">
+                    <i class="fa-solid fa-arrow-left"></i> Voltar ao Portal Público
+                </a>
+            </form>
+        </div>
+    </div>
+
+    <!-- Barra Superior de Navegação -->
+    <nav class="admin-navbar">
+        <div class="navbar-container">
+            <div class="navbar-brand-group">
+                <a href="admin.html" class="navbar-brand">
+                    <i class="fa-solid fa-sliders" aria-hidden="true"></i>
+                    <span>Painel de Gestão • SME Batatais</span>
+                </a>
+
+                <div class="navbar-stats-badges">
+                    <span class="stat-pill pill-active" id="stat-ativos" title="Atalhos ativos visíveis ao público">
+                        <i class="fa-solid fa-circle-check"></i> 5 ativos
+                    </span>
+                    <span class="stat-pill pill-disabled" id="stat-desativados" title="Atalhos temporariamente ocultos">
+                        <i class="fa-solid fa-circle-pause"></i> 0 ocultos
+                    </span>
+                </div>
+            </div>
+
+            <div class="navbar-actions">
+                <!-- Botão de Prévia ao Vivo -->
+                <button type="button" id="btn-toggle-preview" class="btn btn-secondary btn-sm active" title="Alternar visualização da prévia ao vivo em tempo real">
+                    <i class="fa-solid fa-eye-slash"></i> Ocultar Prévia
+                </button>
+
+                <!-- Botão Adicionar Atalho -->
+                <button type="button" id="btn-novo-atalho" class="btn btn-primary btn-sm" title="Criar um novo atalho de serviço">
+                    <i class="fa-solid fa-plus"></i> Novo Atalho
+                </button>
+
+                <!-- Visualizar Portal -->
+                <a href="index.html" class="btn btn-secondary btn-sm" target="_blank" title="Abrir página pública em nova aba">
+                    <i class="fa-solid fa-arrow-up-right-from-square"></i> Portal Público
+                </a>
+
+                <!-- Sair -->
+                <button type="button" id="btn-logout" class="btn btn-danger-outline btn-sm" title="Encerrar sessão">
+                    <i class="fa-solid fa-right-from-bracket"></i> Sair
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Conteúdo Principal com Prévia Dividida -->
+    <main class="admin-container">
+
+        <div id="admin-layout-split" class="admin-layout-split preview-open">
+
+            <!-- Coluna Principal (Formulários e Lista) -->
+            <div class="admin-main-column">
+
+                <!-- Banner Hero de Gestão -->
+                <div class="admin-hero-banner">
+                    <div class="admin-hero-title">
+                        <h1>
+                            <i class="fa-solid fa-table-cells-large" style="color: var(--primary);"></i>
+                            Gestão de Serviços e Atalhos
+                        </h1>
+                        <p>Ative, oculte, ordene e configure os links de inscrições, editais e planilhas oficiais.</p>
+                    </div>
+                    <div class="admin-hero-buttons">
+                        <!-- Importar Arquivo Oculto -->
+                        <input type="file" id="input-import-file" accept=".js,.json" style="display: none;">
+                        <button type="button" id="btn-importar-trigger" class="btn btn-secondary btn-sm" title="Restaurar ou carregar arquivo config.js">
+                            <i class="fa-solid fa-file-import"></i> Importar
+                        </button>
+
+                        <button type="button" id="btn-restaurar" class="btn btn-secondary btn-sm" title="Restaura os valores de fábrica padrão">
+                            <i class="fa-solid fa-rotate-left"></i> Padrões
+                        </button>
+
+                        <button type="button" id="btn-exportar" class="btn btn-success btn-sm" title="Gera o código ou arquivo config.js para publicação">
+                            <i class="fa-solid fa-cloud-arrow-up"></i> Exportar / Publicar
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Configurações Gerais do Portal -->
+                <div class="manage-card" style="margin-bottom: 1.5rem;">
+                    <div class="manage-card-top" data-target="body-config-geral">
+                        <div class="manage-card-identity">
+                            <div class="manage-icon-avatar" style="background: #f1f5f9; color: #475569;">
+                                <i class="fa-solid fa-gear"></i>
+                            </div>
+                            <div>
+                                <div class="manage-title-preview">Configurações Gerais do Portal</div>
+                                <span class="manage-tag-preview" id="count-total-atalhos">Portal Cidadão</span>
+                            </div>
+                        </div>
+                        <div class="manage-card-actions-top">
+                            <button type="button" class="btn-toggle-expand" data-target="body-config-geral" title="Recolher / Expandir configurações">
+                                <i class="fa-solid fa-chevron-down"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="manage-card-body" id="body-config-geral">
+                        <div class="form-grid-row">
+                            <div class="form-group">
+                                <label class="form-label" for="config-ano">
+                                    <i class="fa-solid fa-calendar-check"></i> Ano Letivo de Referência
+                                </label>
+                                <input type="text" id="config-ano" class="form-input" value="2026" placeholder="Ex: 2026">
+                                <span class="form-help">Exibido nos selos e cabeçalho do portal.</span>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="form-label" for="config-senha">
+                                    <i class="fa-solid fa-key"></i> Senha de Acesso ao Painel
+                                </label>
+                                <div class="input-password-wrapper">
+                                    <input type="password" id="config-senha" class="form-input" value="educacao2026" placeholder="Nova senha...">
+                                    <button type="button" id="btn-toggle-config-pwd" class="btn-toggle-pwd" title="Exibir/Ocultar senha">
+                                        <i class="fa-solid fa-eye"></i>
+                                    </button>
+                                </div>
+                                <span class="form-help">Senha exigida para abrir este painel.</span>
+                            </div>
+                        </div>
+
+                        <div class="form-grid-row" style="margin-bottom: 0;">
+                            <div class="form-group">
+                                <label class="form-label" for="config-titulo-hero">
+                                    <i class="fa-solid fa-heading"></i> Título Principal do Portal
+                                </label>
+                                <input type="text" id="config-titulo-hero" class="form-input" value="Painel de Matrículas e Vagas">
+                            </div>
+
+                            <div class="form-group">
+                                <label class="form-label" for="config-subtitulo-hero">
+                                    <i class="fa-solid fa-paragraph"></i> Subtítulo Explicativo
+                                </label>
+                                <input type="text" id="config-subtitulo-hero" class="form-input" value="Acesso unificado para solicitação de vagas, consulta de listas de espera e acompanhamento das convocações das creches e escolas municipais.">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Barra de Ferramentas (Busca e Filtro) -->
+                <div class="admin-toolbar">
+                    <div class="toolbar-search">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                        <input type="text" id="search-shortcuts" placeholder="Filtrar atalhos por título, link ou etiqueta...">
+                    </div>
+
+                    <div class="toolbar-filters">
+                        <button type="button" class="filter-btn active" data-filter="todos">Todos</button>
+                        <button type="button" class="filter-btn" data-filter="ativos">Ativos</button>
+                        <button type="button" class="filter-btn" data-filter="desabilitados">Ocultos</button>
+                    </div>
+                </div>
+
+                <!-- Lista Dinâmica de Atalhos -->
+                <div id="manage-list" class="manage-list">
+                    <!-- Os cards são injetados dinamicamente pelo admin.js -->
+                </div>
+
+            </div>
+
+            <!-- Coluna Direita (Prévia ao Vivo em Tempo Real) -->
+            <aside class="live-preview-panel" id="live-preview-panel">
+                <div class="preview-header">
+                    <div class="preview-header-title">
+                        <i class="fa-solid fa-mobile-screen"></i>
+                        <span>Visualização do Cidadão</span>
+                    </div>
+                    <span class="preview-badge-live">
+                        <i class="fa-solid fa-circle" style="font-size: 0.5rem; margin-right: 3px;"></i> AO VIVO
+                    </span>
+                </div>
+
+                <div class="preview-body">
+                    <!-- Mock do Cabeçalho Público -->
+                    <div class="preview-mock-hero">
+                        <h3 id="preview-hero-title">Painel de Matrículas e Vagas</h3>
+                        <p id="preview-hero-subtitle">Consulte listas de espera e inscrições em tempo real.</p>
+                    </div>
+
+                    <!-- Cards Renderizados em Tempo Real -->
+                    <div id="preview-cards-container" class="preview-cards-container">
+                        <!-- Cards renderizados via JS -->
+                    </div>
+                </div>
+            </aside>
+
+        </div>
+
+        <!-- Barra Fixa Inferior de Ações -->
+        <div class="floating-actions-bar">
+            <div class="floating-status">
+                <span class="floating-status-dot"></span>
+                <span>Salvamento automático ativo • Alterações salvas instantaneamente</span>
+            </div>
+            <div class="floating-buttons">
+                <button type="button" id="btn-salvar" class="btn btn-primary">
+                    <i class="fa-solid fa-floppy-disk"></i> Salvar no Navegador
+                </button>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Modal "Adicionar Novo Atalho" -->
+    <div id="modal-novo-atalho" class="modal-overlay">
+        <div class="modal-box">
+            <div class="modal-header">
+                <h3><i class="fa-solid fa-circle-plus" style="color: var(--primary);"></i> Adicionar Novo Atalho</h3>
+                <button type="button" id="modal-novo-close" class="modal-close-btn" aria-label="Fechar">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+            <form id="form-novo-atalho">
+                <div class="modal-body">
+                    <div class="form-grid-row">
+                        <div class="form-group">
+                            <label class="form-label" for="novo-titulo">Título do Atalho *</label>
+                            <input type="text" id="novo-titulo" class="form-input" placeholder="Ex: Transporte Escolar Municipal" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="novo-badge">Etiqueta de Destaque</label>
+                            <input type="text" id="novo-badge" class="form-input" placeholder="Ex: Frota Escolar, Inscrição">
+                        </div>
+                    </div>
+
+                    <div class="form-group" style="margin-bottom: 1.25rem;">
+                        <label class="form-label" for="novo-url">Link de Destino (URL) *</label>
+                        <input type="url" id="novo-url" class="form-input" placeholder="https://..." required>
+                        <span class="form-help">Link da planilha Google, formulário Google Forms, Google Drive ou site oficial.</span>
+                    </div>
+
+                    <div class="form-group" style="margin-bottom: 1.25rem;">
+                        <label class="form-label" for="novo-desc">Descrição Explicativa</label>
+                        <input type="text" id="novo-desc" class="form-input" placeholder="Breve orientação para os pais e responsáveis...">
+                    </div>
+
+                    <div class="form-grid-row">
+                        <div class="form-group">
+                            <label class="form-label" for="novo-tema">Cor Temática</label>
+                            <select id="novo-tema" class="form-select">
+                                <option value="creche">Azul (Creche)</option>
+                                <option value="espera">Âmbar (Lista de Espera)</option>
+                                <option value="atendidos">Verde (Atendidos)</option>
+                                <option value="criterios">Roxo (Critérios)</option>
+                                <option value="eief">Coral (Fundamental)</option>
+                                <option value="transporte">Ciano (Transporte)</option>
+                                <option value="merenda">Verde (Alimentação)</option>
+                                <option value="geral">Neutro (Geral)</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label" for="novo-icone">Ícone (Font Awesome)</label>
+                            <input type="text" id="novo-icone" class="form-input" value="fa-solid fa-link" placeholder="fa-solid fa-...">
+                        </div>
+                    </div>
+
+                    <div class="form-grid-row">
+                        <div class="form-group">
+                            <label class="form-label" for="novo-btntext">Texto da Ação</label>
+                            <input type="text" id="novo-btntext" class="form-input" value="Acessar">
+                        </div>
+                        <div class="form-group" style="justify-content: flex-end; padding-bottom: 0.5rem;">
+                            <label class="checkbox-label">
+                                <input type="checkbox" id="novo-destaque">
+                                <span style="font-size: 0.88rem; font-weight: 600;">Destacar este card no portal</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" onclick="document.getElementById('modal-novo-atalho').classList.remove('active')">
+                        Cancelar
+                    </button>
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fa-solid fa-plus"></i> Criar Atalho
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal "Exportar / Publicar" -->
+    <div id="modal-exportar" class="modal-overlay">
+        <div class="modal-box">
+            <div class="modal-header">
+                <h3><i class="fa-solid fa-cloud-arrow-up" style="color: var(--success);"></i> Exportar e Publicar Alterações</h3>
+                <button type="button" id="modal-exportar-close" class="modal-close-btn" aria-label="Fechar modal">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>
+                    As alterações já estão ativas <strong>neste navegador</strong>. Para disponibilizá-las para <strong>todos os cidadãos</strong> no GitHub Pages:
+                </p>
+                <ol style="margin-left: 1.25rem; margin-top: 0.6rem; margin-bottom: 1.2rem; line-height: 1.6;">
+                    <li>Clique em <strong>"Baixar config.js"</strong> abaixo;</li>
+                    <li>Substitua o arquivo <code>config.js</code> na pasta do seu repositório;</li>
+                    <li>Faça o <code>git commit</code> e <code>git push</code> no GitHub.</li>
+                </ol>
+                <label class="form-label" for="modal-code">Código atualizado para <code>config.js</code>:</label>
+                <textarea id="modal-code" class="modal-code-area" readonly></textarea>
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="btn-copiar-codigo" class="btn btn-secondary">
+                    <i class="fa-solid fa-copy"></i> Copiar Código
+                </button>
+                <button type="button" id="btn-baixar-arquivo" class="btn btn-success">
+                    <i class="fa-solid fa-download"></i> Baixar config.js
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="config.js"></script>
+    <script src="admin.js"></script>
+</body>
+</html>
