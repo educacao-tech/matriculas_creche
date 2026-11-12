@@ -123,6 +123,15 @@
                         <p>Ative, oculte, ordene e configure os links de inscrições, editais e planilhas oficiais.</p>
                     </div>
                     <div class="admin-hero-buttons">
+                        <!-- Botão Publicar no GitHub -->
+                        <button type="button" id="btn-publicar-github" class="btn btn-github btn-sm" title="Comitar e publicar alterações diretamente no repositório GitHub">
+                            <i class="fa-brands fa-github"></i> Publicar no GitHub
+                        </button>
+
+                        <button type="button" id="btn-config-github" class="btn btn-secondary btn-sm" title="Configurar Token do GitHub">
+                            <i class="fa-solid fa-key"></i> Conectar GitHub
+                        </button>
+
                         <!-- Importar Arquivo Oculto -->
                         <input type="file" id="input-import-file" accept=".js,.json" style="display: none;">
                         <button type="button" id="btn-importar-trigger" class="btn btn-secondary btn-sm" title="Restaurar ou carregar arquivo config.js">
@@ -133,8 +142,8 @@
                             <i class="fa-solid fa-rotate-left"></i> Padrões
                         </button>
 
-                        <button type="button" id="btn-exportar" class="btn btn-success btn-sm" title="Gera o código ou arquivo config.js para publicação">
-                            <i class="fa-solid fa-cloud-arrow-up"></i> Exportar / Publicar
+                        <button type="button" id="btn-exportar" class="btn btn-success btn-sm" title="Gera o código ou arquivo config.js para publicação manual">
+                            <i class="fa-solid fa-cloud-arrow-up"></i> Baixar Arquivo
                         </button>
                     </div>
                 </div>
@@ -253,11 +262,14 @@
         <div class="floating-actions-bar">
             <div class="floating-status">
                 <span class="floating-status-dot"></span>
-                <span>Salvamento automático ativo • Alterações salvas instantaneamente</span>
+                <span>Salvamento local ativo • Sincronize com o GitHub com 1 clique</span>
             </div>
             <div class="floating-buttons">
-                <button type="button" id="btn-salvar" class="btn btn-primary">
-                    <i class="fa-solid fa-floppy-disk"></i> Salvar no Navegador
+                <button type="button" id="btn-salvar" class="btn btn-secondary">
+                    <i class="fa-solid fa-floppy-disk"></i> Salvar Local
+                </button>
+                <button type="button" id="btn-floating-github" class="btn btn-github">
+                    <i class="fa-brands fa-github"></i> Publicar no GitHub
                 </button>
             </div>
         </div>
@@ -373,6 +385,75 @@
                     <i class="fa-solid fa-download"></i> Baixar config.js
                 </button>
             </div>
+        </div>
+    </div>
+
+    <!-- Modal de Configuração do GitHub -->
+    <div id="modal-github-config" class="modal-overlay">
+        <div class="modal-box">
+            <div class="modal-header">
+                <h3><i class="fa-brands fa-github"></i> Conexão Direta com GitHub</h3>
+                <button type="button" id="modal-github-close" class="modal-close-btn" aria-label="Fechar">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+            <form id="form-github-config">
+                <div class="modal-body">
+                    <p style="margin-bottom: 1rem; line-height: 1.6;">
+                        Conecte um <strong>Personal Access Token (PAT)</strong> do GitHub para que qualquer alteração feita no painel seja comitada e publicada automaticamente no repositório oficial.
+                    </p>
+
+                    <div class="form-group" style="margin-bottom: 1.25rem;">
+                        <label class="form-label" for="gh-token">
+                            <i class="fa-solid fa-key"></i> Token de Acesso do GitHub (PAT) *
+                        </label>
+                        <div class="input-password-wrapper">
+                            <input type="password" id="gh-token" class="form-input" placeholder="ghp_..." required autocomplete="off">
+                            <button type="button" id="btn-toggle-gh-token" class="btn-toggle-pwd" title="Mostrar/ocultar token">
+                                <i class="fa-solid fa-eye"></i>
+                            </button>
+                        </div>
+                        <span class="form-help">
+                            O token é salvo de forma segura no armazenamento local do seu navegador e nunca é compartilhado publicamente.
+                        </span>
+                    </div>
+
+                    <div class="form-grid-row">
+                        <div class="form-group">
+                            <label class="form-label" for="gh-repo">Repositório (owner/repo)</label>
+                            <input type="text" id="gh-repo" class="form-input" value="educacao-tech/matriculas_creche" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="gh-branch">Branch</label>
+                            <input type="text" id="gh-branch" class="form-input" value="main" required>
+                        </div>
+                    </div>
+
+                    <!-- Instruções de como gerar o token -->
+                    <div style="background: #eff6ff; border: 1px solid #bfdbfe; border-radius: 10px; padding: 1rem; margin-top: 1rem; font-size: 0.85rem; color: #1e40af;">
+                        <div style="font-weight: 700; margin-bottom: 0.35rem; display: flex; align-items: center; gap: 0.4rem;">
+                            <i class="fa-solid fa-circle-question"></i> Como obter seu token no GitHub:
+                        </div>
+                        <ol style="margin-left: 1.2rem; line-height: 1.5;">
+                            <li>Acesse <a href="https://github.com/settings/tokens/new?scopes=repo&description=Painel+Matriculas+Batatais" target="_blank" rel="noopener noreferrer" style="color: #2563eb; font-weight: 700; text-decoration: underline;">Gerar Token no GitHub <i class="fa-solid fa-arrow-up-right-from-square" style="font-size: 0.75rem;"></i></a>;</li>
+                            <li>Marque o escopo <strong>repo</strong> (ou permissão <em>Contents: Read and write</em> em Fine-grained tokens);</li>
+                            <li>Clique no final da página em <strong>Generate token</strong>;</li>
+                            <li>Copie o código gerado (começa com <code>ghp_</code>) e cole no campo acima.</li>
+                        </ol>
+                    </div>
+
+                    <div id="gh-status-msg" style="display: none; margin-top: 1rem; padding: 0.75rem; border-radius: 8px; font-size: 0.88rem; font-weight: 600;"></div>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" id="btn-testar-gh" class="btn btn-secondary">
+                        <i class="fa-solid fa-plug"></i> Testar Conexão
+                    </button>
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fa-solid fa-check"></i> Salvar Conexão
+                    </button>
+                </div>
+            </form>
         </div>
     </div>
 

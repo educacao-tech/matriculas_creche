@@ -9,6 +9,9 @@
     const STORAGE_KEY = 'portal_matriculas_config';
     const SESSION_AUTH_KEY = 'portal_admin_auth';
     const LOCAL_AUTH_KEY = 'portal_admin_auth_local';
+    const GH_TOKEN_KEY = 'portal_admin_github_token';
+    const GH_REPO_KEY = 'portal_admin_github_repo';
+    const GH_BRANCH_KEY = 'portal_admin_github_branch';
 
     // Estado geral
     let configState = null;
@@ -51,6 +54,7 @@
         configurarToolbarBusca();
         configurarModais();
         configurarImportExport();
+        configurarIntegracaoGitHub();
     }
 
     // =========================================================================
@@ -951,6 +955,243 @@
 
 window.PORTAL_CONFIG = ${jsonFormatado};
 `;
+    }
+
+    // =========================================================================
+    // 11. INTEGRAÇÃO DIRETA COM O GITHUB (API REST)
+    // =========================================================================
+    function configurarIntegracaoGitHub() {
+        const btnPublicarHero = document.getElementById('btn-publicar-github');
+        const btnPublicarFloating = document.getElementById('btn-floating-github');
+        const btnConfigGH = document.getElementById('btn-config-github');
+        const modalGH = document.getElementById('modal-github-config');
+        const btnFecharGH = document.getElementById('modal-github-close');
+        const formGH = document.getElementById('form-github-config');
+        const inputToken = document.getElementById('gh-token');
+        const inputRepo = document.getElementById('gh-repo');
+        const inputBranch = document.getElementById('gh-branch');
+        const btnToggleToken = document.getElementById('btn-toggle-gh-token');
+        const btnTestarGH = document.getElementById('btn-testar-gh');
+        const statusMsg = document.getElementById('gh-status-msg');
+
+        // Carrega valores salvos
+        const tokenSalvo = localStorage.getItem(GH_TOKEN_KEY) || '';
+        const repoSalvo = localStorage.getItem(GH_REPO_KEY) || (configState.githubRepo || 'educacao-tech/matriculas_creche');
+        const branchSalva = localStorage.getItem(GH_BRANCH_KEY) || (configState.githubBranch || 'main');
+
+        if (inputToken) inputToken.value = tokenSalvo;
+        if (inputRepo) inputRepo.value = repoSalvo;
+        if (inputBranch) inputBranch.value = branchSalva;
+
+        // Toggle visibilidade do token
+        if (btnToggleToken && inputToken) {
+            btnToggleToken.addEventListener('click', function() {
+                const tipo = inputToken.getAttribute('type');
+                if (tipo === 'password') {
+                    inputToken.setAttribute('type', 'text');
+                    btnToggleToken.innerHTML = '<i class="fa-solid fa-eye-slash"></i>';
+                } else {
+                    inputToken.setAttribute('type', 'password');
+                    btnToggleToken.innerHTML = '<i class="fa-solid fa-eye"></i>';
+                }
+            });
+        }
+
+        // Abrir Modal de Configuração
+        function abrirModalGH() {
+            if (statusMsg) statusMsg.style.display = 'none';
+            modalGH.classList.add('active');
+            setTimeout(() => inputToken.focus(), 100);
+        }
+
+        if (btnConfigGH) btnConfigGH.addEventListener('click', abrirModalGH);
+        if (btnFecharGH) btnFecharGH.addEventListener('click', () => modalGH.classList.remove('active'));
+
+        // Salvar Configuração do GitHub
+        if (formGH) {
+            formGH.addEventListener('submit', function(e) {
+                e.preventDefault();
+                const token = inputToken.value.trim();
+                const repo = inputRepo.value.trim() || 'educacao-tech/matriculas_creche';
+                const branch = inputBranch.value.trim() || 'main';
+
+                localStorage.setItem(GH_TOKEN_KEY, token);
+                localStorage.setItem(GH_REPO_KEY, repo);
+                localStorage.setItem(GH_BRANCH_KEY, branch);
+
+                configState.githubRepo = repo;
+                configState.githubBranch = branch;
+                salvarConfiguracao(false);
+
+                modalGH.classList.remove('active');
+                mostrarToast("Credenciais do GitHub salvas com sucesso!");
+            });
+        }
+
+        // Testar Conexão com GitHub
+        if (btnTestarGH) {
+            btnTestarGH.addEventListener('click', async function() {
+                const token = inputToken.value.trim();
+                const repo = inputRepo.value.trim();
+
+                if (!token) {
+                    mostrarStatusGH("Informe um token antes de testar.", false);
+                    return;
+                }
+
+                btnTestarGH.disabled = true;
+                btnTestarGH.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Testando...';
+
+                try {
+                    const res = await fetch(`https://api.github.com/repos/${repo}`, {
+                        headers: {
+                            'Authorization': `Bearer ${token}`,
+                            'Accept': 'application/vnd.github.v3+json'
+                        }
+                    });
+
+                    if (res.ok) {
+                        const dados = await res.json();
+                        const podePush = dados.permissions ? dados.permissions.push : true;
+                        if (podePush) {
+                            mostrarStatusGH(`✓ Conectado com sucesso ao repositório "${dados.full_name}" com permissão de escrita!`, true);
+                        } else {
+                            mostrarStatusGH(`Aviso: Conectado a "${dados.full_name}", mas seu token não tem permissão de escrita (push).`, false);
+                        }
+                    } else if (res.status === 401) {
+                        mostrarStatusGH("Erro 401: Token inválido ou expirado. Verifique o token.", false);
+                    } else if (res.status === 404) {
+                        mostrarStatusGH(`Erro 404: Repositório "${repo}" não encontrado ou token sem acesso.`, false);
+                    } else {
+                        mostrarStatusGH(`Erro ${res.status}: Não foi possível autenticar.`, false);
+                    }
+                } catch (err) {
+                    mostrarStatusGH(`Erro de conexão: ${err.message}`, false);
+                } finally {
+                    btnTestarGH.disabled = false;
+                    btnTestarGH.innerHTML = '<i class="fa-solid fa-plug"></i> Testar Conexão';
+                }
+            });
+        }
+
+        function mostrarStatusGH(msg, sucesso) {
+            if (!statusMsg) return;
+            statusMsg.style.display = 'block';
+            statusMsg.style.background = sucesso ? '#ecfdf5' : '#fef2f2';
+            statusMsg.style.color = sucesso ? '#065f46' : '#991b1b';
+            statusMsg.style.border = `1px solid ${sucesso ? '#a7f3d0' : '#fecaca'}`;
+            statusMsg.textContent = msg;
+        }
+
+        // Botões Publicar no GitHub
+        const dispararPublicacao = () => publicarNoGitHub(abrirModalGH);
+        if (btnPublicarHero) btnPublicarHero.addEventListener('click', dispararPublicacao);
+        if (btnPublicarFloating) btnPublicarFloating.addEventListener('click', dispararPublicacao);
+    }
+
+    // Função Principal de Publicação no GitHub
+    async function publicarNoGitHub(abrirModalConfig) {
+        const token = localStorage.getItem(GH_TOKEN_KEY);
+        const repo = localStorage.getItem(GH_REPO_KEY) || (configState.githubRepo || 'educacao-tech/matriculas_creche');
+        const branch = localStorage.getItem(GH_BRANCH_KEY) || (configState.githubBranch || 'main');
+
+        if (!token) {
+            alert("Para publicar diretamente no GitHub, você precisa conectar o seu Token de Acesso do GitHub.\nVamos abrir a tela de conexão.");
+            abrirModalConfig();
+            return;
+        }
+
+        const botoes = [
+            document.getElementById('btn-publicar-github'),
+            document.getElementById('btn-floating-github')
+        ].filter(Boolean);
+
+        botoes.forEach(b => {
+            b.disabled = true;
+            b.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Publicando no GitHub...';
+        });
+
+        try {
+            // Salva antes no navegador
+            salvarConfiguracao(false);
+
+            const filePath = 'config.js';
+            const urlArquivo = `https://api.github.com/repos/${repo}/contents/${filePath}?ref=${branch}`;
+
+            // 1. Obtém o SHA atual do arquivo no GitHub
+            let currentSha = null;
+            const resGet = await fetch(urlArquivo, {
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                    'Accept': 'application/vnd.github.v3+json'
+                }
+            });
+
+            if (resGet.ok) {
+                const dataGet = await resGet.json();
+                currentSha = dataGet.sha;
+            } else if (resGet.status === 401) {
+                throw new Error("Token do GitHub inválido ou sem permissão. Verifique nas configurações do GitHub.");
+            } else if (resGet.status !== 404) {
+                const erroData = await resGet.json().catch(() => ({}));
+                throw new Error(erroData.message || `Erro ao consultar arquivo (${resGet.status})`);
+            }
+
+            // 2. Prepara o conteúdo em Base64 compatível com UTF-8
+            const codigoJS = gerarCodigoConfigJS();
+            const base64Conteudo = btoa(unescape(encodeURIComponent(codigoJS)));
+
+            // 3. Executa o Commit (PUT)
+            const payload = {
+                message: `Atualização de atalhos e links via Painel Administrativo em ${new Date().toLocaleDateString('pt-BR')}`,
+                content: base64Conteudo,
+                branch: branch
+            };
+            if (currentSha) {
+                payload.sha = currentSha;
+            }
+
+            const resPut = await fetch(`https://api.github.com/repos/${repo}/contents/${filePath}`, {
+                method: 'PUT',
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                    'Accept': 'application/vnd.github.v3+json',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(payload)
+            });
+
+            if (!resPut.ok) {
+                const erroPut = await resPut.json().catch(() => ({}));
+                throw new Error(erroPut.message || `Erro ao comitar alterações (${resPut.status})`);
+            }
+
+            const resultadoCommit = await resPut.json();
+            const commitUrl = resultadoCommit.commit ? resultadoCommit.commit.html_url : `https://github.com/${repo}`;
+
+            mostrarToast("Publicado no GitHub com sucesso! O site atualizará em breve.");
+
+            // Alerta amigável com link do commit
+            setTimeout(() => {
+                const querVer = confirm(
+                    "✓ Sucesso! O arquivo config.js foi atualizado no GitHub!\n\n" +
+                    "O GitHub Pages publicará a nova versão automaticamente em instantes.\n\n" +
+                    "Deseja visualizar o commit no GitHub?"
+                );
+                if (querVer && commitUrl) {
+                    window.open(commitUrl, '_blank');
+                }
+            }, 300);
+
+        } catch (err) {
+            console.error("Erro na publicação:", err);
+            alert(`Falha ao publicar no GitHub:\n\n${err.message}\n\nVerifique se o seu token possui permissão de escrita no repositório.`);
+        } finally {
+            botoes.forEach(b => {
+                b.disabled = false;
+                b.innerHTML = '<i class="fa-brands fa-github"></i> Publicar no GitHub';
+            });
+        }
     }
 
     // Exibe notificação toast

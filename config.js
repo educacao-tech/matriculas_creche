@@ -12,6 +12,8 @@ window.PORTAL_CONFIG = {
     tituloHero: "Painel de Matrículas e Vagas",
     subtituloHero: "Acesso unificado para solicitação de vagas, consulta de listas de espera e acompanhamento das convocações das creches e escolas municipais.",
     senhaAdmin: "educacao2026", // Senha de acesso ao admin.html (pode ser alterada no painel)
+    githubRepo: "educacao-tech/matriculas_creche", // Repositório oficial para sincronização direta
+    githubBranch: "main",
     atalhos: [
         {
             id: "btn-inscricao",

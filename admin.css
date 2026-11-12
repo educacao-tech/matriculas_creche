@@ -916,6 +916,18 @@ body {
     box-shadow: 0 4px 12px rgba(30, 64, 175, 0.25);
 }
 
+.btn-github {
+    background: #181717;
+    color: #ffffff;
+    border-color: #24292f;
+}
+
+.btn-github:hover {
+    background: #000000;
+    color: #ffffff;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.35);
+}
+
 .btn-secondary {
     background: #ffffff;
     color: var(--text-secondary);
