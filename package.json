@@ -1,0 +1,12 @@
+{
+  "name": "matriculas_creche",
+  "version": "1.0.0",
+  "description": "Painel de Matrículas e Vagas de Creche - Secretaria Municipal de Educação de Batatais",
+  "main": "index.html",
+  "scripts": {
+    "start": "npx --yes serve . -l 5500",
+    "dev": "npx --yes serve . -l 5500"
+  },
+  "author": "Secretaria Municipal de Educação de Batatais",
+  "license": "ISC"
+}
