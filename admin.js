@@ -76,7 +76,7 @@
         }
 
         // Garante integridade dos campos padrão
-        if (!configState.anoLetivo) configState.anoLetivo = '2026';
+        if (!configState.anoLetivo) configState.anoLetivo = '2027';
         if (!configState.tituloHero) configState.tituloHero = 'Painel de Matrículas e Vagas';
         if (!configState.subtituloHero) configState.subtituloHero = 'Acesso unificado para solicitação de vagas, consulta de listas de espera e acompanhamento das convocações das creches e escolas municipais.';
         if (!configState.senhaAdmin) configState.senhaAdmin = 'educacao2026';
@@ -200,7 +200,7 @@
         const inputSubtitulo = document.getElementById('config-subtitulo-hero');
         const inputSenha = document.getElementById('config-senha');
 
-        if (inputAno) inputAno.value = configState.anoLetivo || '2026';
+        if (inputAno) inputAno.value = configState.anoLetivo || '2027';
         if (inputTitulo) inputTitulo.value = configState.tituloHero || 'Painel de Matrículas e Vagas';
         if (inputSubtitulo) inputSubtitulo.value = configState.subtituloHero || '';
         if (inputSenha) inputSenha.value = configState.senhaAdmin || 'educacao2026';

@@ -5,7 +5,7 @@
  */
 
 window.PORTAL_CONFIG = {
-    "anoLetivo": "2026",
+    "anoLetivo": "2027",
     "tituloHero": "Painel de Matrículas e Vagas",
     "subtituloHero": "Acesso unificado para solicitação de vagas, consulta de listas de espera e acompanhamento das convocações das creches e escolas municipais.",
     "senhaAdmin": "educacao2026",
@@ -26,7 +26,7 @@ window.PORTAL_CONFIG = {
         {
             "id": "btn-lista-espera",
             "chave": "listaEspera",
-            "titulo": "Lista de Espera 2026",
+            "titulo": "Lista de Espera 2027",
             "descricao": "Acompanhe a posição na fila de espera, ordem de classificação e data de protocolo da solicitação.",
             "url": "https://docs.google.com/spreadsheets/d/10djnC8tHFILdwhxP-WmDq1EE-YJHj7LT/edit?usp=sharing&ouid=116154735950320601146&rtpof=true&sd=true",
             "badge": "Fila Pública",
@@ -39,7 +39,7 @@ window.PORTAL_CONFIG = {
         {
             "id": "btn-lista-atendidos",
             "chave": "listaAtendidos",
-            "titulo": "Lista de Atendidos 2026",
+            "titulo": "Lista de Atendidos 2027",
             "descricao": "Relação das crianças contempladas com vagas e convocadas para a confirmação de matrícula na unidade.",
             "url": "https://docs.google.com/spreadsheets/d/1g6mB1OIiXSPdfW6JkJ8LYX5upBaUQrjt/edit?usp=sharing&ouid=116154735950320601146&rtpof=true&sd=true",
             "badge": "Chamadas",
